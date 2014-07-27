@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}{% load i18n %}
+{% load avatar_tags %}
+
+{% block title %}Chart{% endblock %}
+
+{% block content %}
+<h3>Search</h3>
+<form id="review-form" method="post" class="form-horizontal" action=".">
+    {% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+       {{ hidden }}
+    {% endfor %}
+    {% for field in form.visible_fields %}
+        <div class="form-group">
+          {{ field }}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-orange" id="query">Query</button>
+</form>
+<h3>Get Timepost</h3>
+<form id="review-form" method="post" class="form-horizontal" action="{% url 'users:timepost_on_id' %}">
+    {% csrf_token %}
+    {% for hidden in id_form.hidden_fields %}
+       {{ hidden }}
+    {% endfor %}
+    {% for field in id_form.visible_fields %}
+        <div class="form-group">
+          {{ field }}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-orange" id="query">Query</button>
+</form>
+{% if users %}
+	{% for user in users %}
+	<div>
+		{{ user.username }} 
+		{{ user.id }} 
+	</div>
+	{% endfor %}
+{% endif %}
+{% endblock %}

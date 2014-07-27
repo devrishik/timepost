@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load avatar_tags %}
+{% load static %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2>{{ object.username }}</h2>
+    </div>
+  </div>
+
+{% if object == request.user %}
+<!-- Action buttons -->     
+<div class="row">
+
+  <div class="col-sm-12 ">
+    <a class="btn btn-primary" href="{% url 'users:update' %}">My Info</a>
+    <a class="btn btn-primary" href="{% url 'account_email' %}">E-Mail</a>
+    <a class="btn btn-info" href="{% url 'avatar_change' %}">Avatar</a>
+    <!-- Your Stuff: Custom user template urls -->
+    <a class="btn btn-danger" href="{% url 'users:insta' request.user.username %}">TimePost</a>
+</div>
+<h3>Search</h3>
+<form id="review-form" method="post" class="form-horizontal" action="{% url 'users:search' %}">
+    {% csrf_token %}
+    {% for hidden in form.hidden_fields %}
+       {{ hidden }}
+    {% endfor %}
+    {% for field in form.visible_fields %}
+        <div class="form-group">
+          {{ field }}
+        </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-orange" id="query">Query</button>
+</form>
+     <!-- End Action buttons -->
+{% endif %}
+
+</div>
+{% endblock content %}

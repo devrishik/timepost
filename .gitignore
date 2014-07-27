@@ -1,0 +1,33 @@
+# Python bytecode:
+*.py[co]
+
+# Packaging files:
+*.egg*
+
+# Editor temp files:
+*.swp
+*~
+
+# Sphinx docs:
+build
+
+# SQLite3 database files:
+*.db
+
+# Logs:
+*.log
+
+#Sass Cache
+*.sass-cache
+
+.DS_Store
+roomtonight/media
+
+venv
+
+# mkdocs output
+_docs_html/
+
+#celery-schedules
+celerybeat-schedule
+dump.rdb
